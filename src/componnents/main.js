@@ -1,30 +1,94 @@
 import React from 'react';
 import Task from './task/task';
 
-class main extends React.Component {
+class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            number_of_task: 1,
+            name: "",
+            category: "",
+            status: "",
+            numberOfTask : 0
         };
+
+        this.handleName = this.handleName.bind(this);
+        this.handleCategory = this.handleCategory.bind(this);
+        this.add = this.add.bind(this);
     }
+
+    add(event) {
+        event.preventDefault();
+        this.setState({
+            status: 'idk',
+            numberOfTask: this.state.numberOfTask + 1 
+        });
+        
+        
+    }
+
+    handleName(event) {
+        this.setState({name: event.target.value});
+    }
+
+    handleCategory(event) {
+        this.setState({category: event.target.value});
+    }
+
  
     render() {
-        return(
-            
-            <Task 
-            name = ""
-            category = ""
-            status = ""
-            />
-            
+        
+        const task = []
+        for (let i = 0; i < this.state.numberOfTask; i++) {
+            if(!this.state.numberOfTask !== 0) {
+                task.push(<li> <Task 
+                    name= {this.state.name}
+                    category={this.state.category}
+                    status={this.state.status}
+                /> </li>)
+            }
+        }
+
+        return (
+            <div>
+                <ul>
+                    {task}
+                </ul>
+                <div class="task task--add">
+                    <form onSubmit={this.add}>
+                        <div class="task__content">
+                        <div class="task__content__name">
+                            <input class="input" type="text" placeholder="Nom de la tâche" name="name" value={this.state.name} onChange={this.handleName} />
+                        </div>
+                        <div class="task__content__category">
+                            <div class="select is-small">
+                            <select value={this.state.category} onChange={this.handleCategory}>
+                                <option>Choisir une catégorie</option>
+                                <option value = "categorie 1">Categorie 1</option>
+                                <option value = "categorie 2">categorie 2</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="task__content__buttons">
+                            <button type="submit" class="task__content__button__add button is-info">
+                            <span class="icon is-small">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                            <span>Ajouter</span>
+                            </button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>   
         );
     }
 }
 
 
 
-export default main;
+
+
+export default Main;
 
 /*
 handleClick(e) {
@@ -39,23 +103,4 @@ handleClick(e) {
         console.log(this.state);
         
     }
-*/
-
-/*
-const task = []
-        for (let i = 0; i < this.state.number_of_task; i++) {
-            if(!this.state.data) {
-                task.push(<li> <Task 
-                    name= {this.state.data[i][0]}
-                    category={this.state.data[i][1]}
-                    status={this.state.data[i][2]}
-                /> </li>)
-            }
-        }
-
-        return (
-            <ul>
-                {task}
-            </ul>
-        );
 */

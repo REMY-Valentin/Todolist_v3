@@ -3,6 +3,7 @@ import Name from './task_components/task_name';
 import Category from './task_components/task_category';
 import Button from './task_components/task_button';
 
+
 class task extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,6 @@ class task extends React.Component {
     }
     
     render() {
-        console.log('render');
         return(
             <div class="task" data-category="">
                 <div class="task__content">
