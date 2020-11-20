@@ -2,6 +2,7 @@ import React from 'react';
 import Name from './task_components/task_name';
 import Category from './task_components/task_category';
 import Button from './task_components/task_button';
+import ProgressBar from './task_components/progress_bar';
 
 
 class task extends React.Component {
@@ -10,15 +11,24 @@ class task extends React.Component {
         this.state = {
             name : this.props.name,
             category : this.props.category,
-            status : this.props.status
+            status : this.props.status,
         };
         this.handler = this.handler.bind(this);
+        this.progress = this.progress.bind(this);
     }
 
     handler(state) {
         this.setState({
             status: state
         })
+    }
+
+    progress() {
+        if(this.state.status === "complete") {
+            return "100%";
+        } else {
+            return "0";
+        }
     }
     
     render() {
@@ -31,7 +41,7 @@ class task extends React.Component {
                     <Button handler={handler.bind(this)} />
                 </div>
                 <div className="progress-bar">
-                    <div className="progress-bar__level" style={{width:"0%"}}></div>
+                    <ProgressBar completion={this.progress()}/>
                 </div>
             </div>
         );
