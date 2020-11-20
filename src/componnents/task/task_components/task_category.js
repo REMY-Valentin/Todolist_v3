@@ -1,5 +1,4 @@
 import React from 'react';
-import task from '../task';
 
 class categrory extends React.Component {
     constructor(props) {
@@ -8,7 +7,7 @@ class categrory extends React.Component {
 
     render() {
         return (
-            <div class="task__content__category">
+            <div className="task__content__category">
                 <p> {this.props.value} </p>
             </div>
         );

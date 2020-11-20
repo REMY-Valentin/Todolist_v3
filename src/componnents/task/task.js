@@ -12,18 +12,26 @@ class task extends React.Component {
             category : this.props.category,
             status : this.props.status
         };
+        this.handler = this.handler.bind(this);
+    }
+
+    handler(state) {
+        this.setState({
+            status: state
+        })
     }
     
     render() {
+        var handler = this.handler;
         return(
-            <div class="task" data-category="">
-                <div class="task__content">
+            <div className="task" data-category="">
+                <div className="task__content">
                     <Name value={this.state.name} />
                     <Category value={this.state.category} />
-                    <Button value={this.state.status} />
+                    <Button handler={handler.bind(this)} />
                 </div>
-                <div class="progress-bar">
-                    <div class="progress-bar__level" style={{width:"0%"}}></div>
+                <div className="progress-bar">
+                    <div className="progress-bar__level" style={{width:"0%"}}></div>
                 </div>
             </div>
         );

@@ -1,5 +1,6 @@
 .container {
   padding: 0.5em;
+  height: 100vh;
 }
 
 .header {
@@ -113,6 +114,11 @@
   display: inline-block;
 }
 
+.task .task--add {
+  display: flex;
+  justify-content: space-between;
+}
+
 .task--add .task__content {
   border-color: #78b6df;
 }
@@ -217,4 +223,27 @@
   .task__content__buttons > .button {
     font-size: 1em;
   }
+}
+
+.addCategory {
+  width: 100%;
+  border: #3298dc solid 1px;
+  border-top: unset;
+}
+
+.addCategory form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addCategory input {
+  margin: 1em 1em;
+}
+
+.addCategory button {
+  margin: 1em 1em;
+}
+
+.addCategory i {
+  margin-right: 0.5em;
 }

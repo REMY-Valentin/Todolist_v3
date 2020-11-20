@@ -6,6 +6,7 @@ class Main extends React.Component {
         super(props);
         this.state = {
             name: "",
+            allCategory: this.props.category,
             category: "",
             status: "",
             numberOfTask : 0
@@ -19,10 +20,9 @@ class Main extends React.Component {
     add(event) {
         event.preventDefault();
         this.setState({
-            status: 'idk',
             numberOfTask: this.state.numberOfTask + 1 
         });
-        
+        event.target.querySelector("input").value = ""
         
     }
 
@@ -35,43 +35,49 @@ class Main extends React.Component {
     }
 
  
-    render() {
-        
+    render() {       
         const task = []
         for (let i = 0; i < this.state.numberOfTask; i++) {
             if(!this.state.numberOfTask !== 0) {
                 task.push(<li> <Task 
                     name= {this.state.name}
                     category={this.state.category}
-                    status={this.state.status}
+                    status= "incomplete"
                 /> </li>)
             }
         }
+
+        const category = []
+        for (let i = 0; i < this.state.allCategory.length; i++) {
+            category.push(
+                <option value = {this.state.allCategory[i]}> {this.state.allCategory[i]} </option>
+            )
+        }
+        
 
         return (
             <div>
                 <ul>
                     {task}
                 </ul>
-                <div class="task task--add">
+                <div className="task task--add">
                     <form onSubmit={this.add}>
-                        <div class="task__content">
-                        <div class="task__content__name">
-                            <input class="input" type="text" placeholder="Nom de la tâche" name="name" value={this.state.name} onChange={this.handleName} />
+                        <div className="task__content">
+                        <div className="task__content__name">
+                            <input className="input" type="text" placeholder="Nom de la tâche" name="name" onChange={this.handleName} />
                         </div>
-                        <div class="task__content__category">
-                            <div class="select is-small">
-                            <select value={this.state.category} onChange={this.handleCategory}>
+                        <div className="task__content__category">
+                            <div className="select is-small">
+                            <select onChange={this.handleCategory}>
                                 <option>Choisir une catégorie</option>
-                                <option value = "categorie 1">Categorie 1</option>
-                                <option value = "categorie 2">categorie 2</option>
+                                {category}
                             </select>
                             </div>
                         </div>
-                        <div class="task__content__buttons">
-                            <button type="submit" class="task__content__button__add button is-info">
-                            <span class="icon is-small">
-                                <i class="fa fa-plus"></i>
+                        <div className="task__content__buttons">
+                            <button type="submit" className="task__content__button__add button is-info">
+                            <span className="icon is-small">
+                                <i className="fa fa-plus"></i>
                             </span>
                             <span>Ajouter</span>
                             </button>
@@ -84,23 +90,4 @@ class Main extends React.Component {
     }
 }
 
-
-
-
-
 export default Main;
-
-/*
-handleClick(e) {
-        //let newNumber = this.state.number_of_task + 1
-        //console.log(newNumber)
-        //let data = this.state.data
-        //let newData = data.push(e)
-        console.log(e);
-        this.setState((state, props) => ({
-            number_of_task: state.number_of_task +1
-        }));
-        console.log(this.state);
-        
-    }
-*/

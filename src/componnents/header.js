@@ -2,31 +2,64 @@ import React from 'react';
 
 
 
-function header() {
-    return (
-        <div class="header">
-            <div class="logo">
-                <a href="./">
-                    <h1 class="title is-1">TodoList</h1>
-                </a>
+
+class header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: this.props.category,
+            filter: "Toutes"
+        }
+    }
+    
+    status(evt) {
+        console.log(evt.target.outerText)
+        console.log(evt.target.className)
+        let allButton = document.querySelector(".filters-bar__element")
+        let currentSelected = allButton.querySelector(".is-selected")
+        
+        currentSelected.className = "button"
+
+        evt.target.className = "button is-info is-selected"
+
+        
+    }
+    
+    render() {
+
+        const category = []
+        for (let i = 0; i < this.state.category.length; i++) {
+            category.push(
+                <option value = {this.state.category[i]}> {this.state.category[i]} </option>
+            )
+        }
+
+        return (
+            <div className="header">
+                <div className="logo">
+                    <a href="./">
+                        <h1 className="title is-1">TodoList</h1>
+                    </a>
+                </div>
+                <div className="filters-bar">
+                    <div className="filters-bar__element buttons are-small has-addons">
+                        <button onClick={this.status} className="button is-info is-selected">Toutes</button>
+                        <button onClick={this.status} className="button">Complètes</button>
+                        <button onClick={this.status} className="button">Incomplètes</button>
+                    </div>
+                    <div className="filters-bar__element task__content__category select is-small">
+                        <select>
+                            <option>Toutes les catégories</option>
+                            {category}
+                        </select>
+                    </div>
+                    <div className="filters-bar__element view-archives">
+                        <a href="./">Voir les archives</a>
+                    </div>
+                </div>
             </div>
-            <div class="filters-bar">
-                <div class="filters-bar__element buttons are-small has-addons">
-                    <button class="button is-info is-selected">Toutes</button>
-                    <button class="button">Complètes</button>
-                    <button class="button">Incomplètes</button>
-                </div>
-                <div class="filters-bar__element task__content__category select is-small">
-                    <select>
-                        <option>Toutes les catégories</option>
-                    </select>
-                </div>
-                <div class="filters-bar__element view-archives">
-                    <a href="./">Voir les archives</a>
-                </div>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 
