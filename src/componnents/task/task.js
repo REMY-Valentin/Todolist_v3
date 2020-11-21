@@ -23,7 +23,7 @@ class task extends React.Component {
     }
 
     progress() {
-        console.log(this.state)
+        //console.log(this.state)
         if(this.state.status === "complete") {
             this.setState({ completion: "100"})
         } else {
@@ -44,8 +44,7 @@ class task extends React.Component {
         var zeroTodo = clickSizeBrowzer - borderLeft
         var percent = ((zeroTodo/sizeTodo)*100)
         this.setState({ completion:(Math.round(percent)) })
-        
-        //if()
+    
     }
     
     render() {
@@ -59,6 +58,7 @@ class task extends React.Component {
                 </div>
                 <div /*onMouseMoveCapture={this.changeCompletion}*/ onClick={this.changeCompletion} className="progress-bar">
                     <ProgressBar completion={this.state.completion}/>
+                    <span className="completion">{this.state.completion} %</span>
                 </div>
             </div>
         );
