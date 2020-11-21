@@ -12,12 +12,12 @@ class progressBar extends React.Component {
         if (prevProps.completion !== this.props.completion) {
             this.setState({completion: this.props.completion});
         }
-        console.log(this.state)
     }
+
 
     render() {
         return(
-            <div className="progress-bar__level" style={{width:this.state.completion}}></div>
+            <div className="progress-bar__level" style={{width:this.state.completion+"%"}}></div>
         );
     }
 }

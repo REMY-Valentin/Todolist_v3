@@ -12,23 +12,40 @@ class task extends React.Component {
             name : this.props.name,
             category : this.props.category,
             status : this.props.status,
+            completion: "0"
         };
         this.handler = this.handler.bind(this);
-        this.progress = this.progress.bind(this);
+        this.changeCompletion = this.changeCompletion.bind(this);
     }
 
-    handler(state) {
-        this.setState({
-            status: state
-        })
+    handler(state) {       
+        this.setState({status: state}, () => this.progress()) 
     }
 
     progress() {
+        console.log(this.state)
         if(this.state.status === "complete") {
-            return "100%";
+            this.setState({ completion: "100"})
         } else {
-            return "0";
+           this.setState({ completion: "0" })
         }
+    }
+
+    changeCompletion(evt) {
+        var sizeTodo = document.querySelector(".progress-bar").clientWidth
+        var sizeBrowzer = document.querySelector("#root").clientWidth
+        var clickSizeBrowzer = evt.clientX
+        //var ratio = sizeTodo/sizeBrowzer 
+        //var clickSizeTodo = ((clickSizeBrowzer*sizeTodo)/sizeBrowzer)
+        //var percent = (clickSizeTodo/sizeTodo)*100
+        //console.log(percent)
+
+        var borderLeft = (sizeBrowzer - sizeTodo) / 2
+        var zeroTodo = clickSizeBrowzer - borderLeft
+        var percent = ((zeroTodo/sizeTodo)*100)
+        this.setState({ completion:(Math.round(percent)) })
+        
+        //if()
     }
     
     render() {
@@ -40,8 +57,8 @@ class task extends React.Component {
                     <Category value={this.state.category} />
                     <Button handler={handler.bind(this)} />
                 </div>
-                <div className="progress-bar">
-                    <ProgressBar completion={this.progress()}/>
+                <div /*onMouseMoveCapture={this.changeCompletion}*/ onClick={this.changeCompletion} className="progress-bar">
+                    <ProgressBar completion={this.state.completion}/>
                 </div>
             </div>
         );
