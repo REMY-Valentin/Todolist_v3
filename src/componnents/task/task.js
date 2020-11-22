@@ -49,8 +49,9 @@ class task extends React.Component {
     
     render() {
         var handler = this.handler;
+        var classTodo = this.state.status + ' task'
         return(
-            <div className="task" data-category="">
+            <div className={classTodo} data-category="">
                 <div className="task__content">
                     <Name value={this.state.name} />
                     <Category value={this.state.category} />

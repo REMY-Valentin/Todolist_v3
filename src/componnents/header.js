@@ -14,14 +14,34 @@ class header extends React.Component {
     
     status(evt) {
         console.log(evt.target.outerText)
-        console.log(evt.target.className)
+        //console.log(evt.target.className)
         let allButton = document.querySelector(".filters-bar__element")
         let currentSelected = allButton.querySelector(".is-selected")
-        
+        //change the button
         currentSelected.className = "button"
-
         evt.target.className = "button is-info is-selected"
-
+        //change the todos
+        var button = evt.target.outerText
+        console.log(button)
+        var todoIncomplete = document.querySelectorAll(".incomplete")
+        var todoComplete = document.querySelectorAll(".complete")
+        //console.log(todoToHide)
+        if(button === "Complètes") {
+            for(let i = 0; i < todoIncomplete.length; i++) {
+                todoIncomplete[i].style.display = "none"
+                todoComplete[i].style.display = "block"
+            }
+        } else if(button === "Incomplètes") {
+            for(let i = 0; i <todoComplete.length; i++) {
+                todoComplete[i].style.display = "none"
+                todoIncomplete[i].style.display = "block"
+            }
+        } else {
+            var todoToHide = document.querySelectorAll('.task')
+            for(let i = 0; i < todoToHide.length; i++) {
+                todoToHide[i].style.display = "block"
+            }
+        }
         
     }
     
