@@ -27,7 +27,7 @@ class task extends React.Component {
         if(this.state.status === "complete") {
             this.setState({ completion: "100"})
         } else {
-           this.setState({ completion: "0" })
+           this.setState({ completion: this.state.completion })
         }
     }
 
