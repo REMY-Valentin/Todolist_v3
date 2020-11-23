@@ -8,7 +8,7 @@ class categrory extends React.Component {
     render() {
         return (
             <div className="task__content__category">
-                <p> {this.props.value} </p>
+                <p>{this.props.value}</p>
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import categrory from './task/task_components/task_category';
 
 
 
@@ -44,6 +45,22 @@ class header extends React.Component {
         }
         
     }
+
+    changeCategory(evt) {
+        //console.log(evt.target.value)
+        var categorySelected = evt.target.value
+        var todo = document.querySelectorAll('.task')
+        for( let i = 0; i < todo.length-1; i++) { //-1 to remove the div add from the array cause we don't want to remove it
+            var category = todo[i].querySelector('.task__content__category p').innerHTML 
+            if (categorySelected === 'all') {
+                todo[i].style.display = 'block'
+            } else if (category !== categorySelected) {
+                todo[i].style.display = "none"
+            } else {
+                todo[i].style.display = "block"
+            }
+        }
+    }
     
     render() {
 
@@ -68,8 +85,8 @@ class header extends React.Component {
                         <button onClick={this.status} className="button">Incomplètes</button>
                     </div>
                     <div className="filters-bar__element task__content__category select is-small">
-                        <select>
-                            <option>Toutes les catégories</option>
+                        <select onChange={this.changeCategory} >
+                            <option value='all'>Toutes les catégories</option>
                             {category}
                         </select>
                     </div>
